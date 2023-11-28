@@ -22,6 +22,10 @@ async function connectToMongo() {
   return client.db();
 }
 
+app.listen(PORT, "0.0.0.0", function () {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 app.get("/babyNames", async (req, res) => {
   const db = await connectToMongo();
   const collection = db.collection("babyNames");
