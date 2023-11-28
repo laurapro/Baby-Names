@@ -5,6 +5,15 @@ const { MongoClient } = require("mongodb");
 var cors = require("cors");
 var app = express();
 
+// Set Content Security Policy
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'none'; style-src 'unsafe-inline'"
+  );
+  next();
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 
