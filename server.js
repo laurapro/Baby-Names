@@ -8,7 +8,8 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const PORT = 5000;
+const DEFAULT_PORT = 3000;
+let PORT = process.env.PORT || DEFAULT_PORT;
 
 const mongoURI =
   "mongodb+srv://provvi:mongo-password@cluster0.nr78vkf.mongodb.net/?retryWrites=true&w=majority";
@@ -22,8 +23,29 @@ async function connectToMongo() {
   return client.db();
 }
 
-app.listen(PORT, "0.0.0.0", function () {
-  console.log(`Server is running on port ${PORT}`);
+function startServer() {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+// Check if the port is already in use
+const server = require("http").createServer();
+server.listen(PORT, "0.0.0.0");
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`Port ${PORT} is already in use, trying another port...`);
+    PORT = PORT === DEFAULT_PORT ? DEFAULT_PORT + 1 : DEFAULT_PORT;
+    startServer();
+  } else {
+    throw err;
+  }
+});
+
+server.on("listening", () => {
+  server.close();
+  startServer();
 });
 
 app.get("/babyNames", async (req, res) => {

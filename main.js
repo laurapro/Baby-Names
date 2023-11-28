@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to update the popularity of a baby name
 async function updatePopularity(name, increment) {
-  await fetch(`http://localhost:5000/updatePopularity/${name}/${increment}`, {
+  await fetch(`http://localhost:3000/updatePopularity/${name}/${increment}`, {
     method: "POST",
   });
 }
