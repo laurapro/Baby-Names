@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to fetch a random baby name
   async function fetchRandomBabyName() {
-    const response = await fetch("http://localhost:3000/getRandomBabyName");
+    const response = await fetch("http://localhost:3001/getRandomBabyName");
     const babyName = await response.json();
     return babyName;
   }
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to update the popularity of a baby name
 async function updatePopularity(name, increment) {
-  await fetch(`http://localhost:3000/updatePopularity/${name}/${increment}`, {
+  await fetch(`http://localhost:3001/updatePopularity/${name}/${increment}`, {
     method: "POST",
   });
 }

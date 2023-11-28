@@ -8,7 +8,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const PORT = 4000;
+const PORT = 3001;
 
 const mongoURI =
   "mongodb+srv://provvi:mongo-password@cluster0.nr78vkf.mongodb.net/?retryWrites=true&w=majority";
