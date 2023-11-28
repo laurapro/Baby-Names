@@ -1,4 +1,4 @@
 # railway.toml
 
 name = "Baby-Names"
-language = "node@14"
+language = "node@18"
